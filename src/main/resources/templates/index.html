@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.2/css/bootstrap.min.css}" />
+    <link th:href="@{/webjars/bootstrap-icons/1.10.0/font/bootstrap-icons.css}" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f7f9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: linear-gradient(to right, #ffffff,#a5e5fe);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            padding-top: 40px;
+        }
+        .form-container {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .table {
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .btn-group-sm a {
+            margin-right: 5px;
+        }
+        h1, h2 {
+            color: #343a40;
+        }
+        .badge {
+            font-size: 0.85rem;
+        }
+        .form-check-input {
+            cursor: pointer;
+        }
+        label {
+            font-weight: 500;
+        }
+    </style>
+    <title>ToDo List</title>
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="mb-4 text-center">Spring Boot ToDo Application</h1>
+    <div class="text-end mb-3">
+        <a class="btn btn-success" href="/create-toDo">
+            <i class="bi bi-plus-square-fill"></i> Create a ToDo
+        </a>
+    </div>
+    <table class="table table-bordered table-striped">
+        <thead class="table-light">
+        <tr>
+            <th>Actions</th>
+            <th>Id</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Created At</th>
+            <th>Updated At</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item: ${toDoItems}">
+            <td>
+                <div class="btn-group-sm" role="group">
+                    <a class="btn btn-outline-primary" th:href="@{/edit/{id}(id=${item.id})}">
+                        <i class="bi bi-pencil-fill"></i> Edit
+                    </a>
+                    <a class="btn btn-outline-danger" th:href="@{/delete/{id}(id=${item.id})}">
+                        <i class="bi bi-trash-fill"></i> Delete
+                    </a>
+                </div>
+            </td>
+            <td th:text="${item.id}"></td>
+            <td th:text="${item.description}"></td>
+            <td>
+                <span th:if="${item.isComplete}" class="badge bg-success">Completed</span>
+                <span th:unless="${item.isComplete}" class="badge bg-warning text-dark">Pending</span>
+            </td>
+            <td th:text="${item.createdAt}"></td>
+            <td th:text="${item.updatedAt}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script th:src="@{/webjars/bootstrap/5.2.2/js/bootstrap.min.js}"></script>
+</body>
+</html>
