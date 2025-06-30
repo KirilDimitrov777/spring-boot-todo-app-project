@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,12 +19,20 @@ public class ToDoItemService {
         return toDoItemRepository.findAll();
     }
 
+    public List<ToDoItem> getCompleted() {
+        return toDoItemRepository.findByIsCompleteTrue();
+    }
+
+    public List<ToDoItem> getPending() {
+        return toDoItemRepository.findByIsCompleteFalse();
+    }
+
     public Optional<ToDoItem> getById(Long id) {
-        return  toDoItemRepository.findById(id);
+        return toDoItemRepository.findById(id);
     }
 
     public ToDoItem save(ToDoItem toDoItem) {
-        if(toDoItem.getId()==null) {
+        if (toDoItem.getId() == null) {
             toDoItem.setCreatedAt(Instant.now());
         }
         toDoItem.setUpdatedAt(Instant.now());

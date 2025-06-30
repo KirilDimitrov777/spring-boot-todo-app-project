@@ -8,7 +8,7 @@
     <link th:href="@{/webjars/bootstrap-icons/1.10.0/font/bootstrap-icons.css}" rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(to right, #ffffff, #a5e5fe);
+            background: linear-gradient(to right, #ffffff,#a5e5fe);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             min-height: 100vh;
             padding-top: 40px;
@@ -46,11 +46,25 @@
 <body>
 <div class="container mt-5">
     <h1 class="mb-4 text-center">Spring Boot ToDo Application</h1>
+
+    <!-- Filter form -->
+    <form method="get" class="text-end mb-3">
+        <div class="input-group w-auto">
+            <label class="input-group-text" for="filter">Filter</label>
+            <select class="form-select" name="filter" id="filter" onchange="this.form.submit()">
+                <option value="all" th:selected="${filter == 'all'}">All</option>
+                <option value="completed" th:selected="${filter == 'completed'}">Completed</option>
+                <option value="pending" th:selected="${filter == 'pending'}">Pending</option>
+            </select>
+        </div>
+    </form>
+
     <div class="text-end mb-3">
         <a class="btn btn-success" href="/create-toDo">
             <i class="bi bi-plus-square-fill"></i> Create a ToDo
         </a>
     </div>
+
     <table class="table table-bordered table-striped">
         <thead class="table-light">
         <tr>
@@ -82,10 +96,14 @@
             </td>
             <td th:text="${#temporals.format(item.createdAt, 'yyyy-MM-dd HH:mm')}"></td>
             <td th:text="${#temporals.format(item.updatedAt, 'yyyy-MM-dd HH:mm')}"></td>
+
         </tr>
         </tbody>
     </table>
 </div>
-<script th:src="@{/webjars/bootstrap/5.2.2/js/bootstrap.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/5.2.2/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>
+
+
+
