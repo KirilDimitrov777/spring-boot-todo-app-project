@@ -8,11 +8,7 @@
     <link th:href="@{/webjars/bootstrap-icons/1.10.0/font/bootstrap-icons.css}" rel="stylesheet">
     <style>
         body {
-            background-color: #f4f7f9;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        body {
-            background: linear-gradient(to right, #ffffff,#a5e5fe);
+            background: linear-gradient(to right, #ffffff, #a5e5fe);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             min-height: 100vh;
             padding-top: 40px;
@@ -84,8 +80,8 @@
                 <span th:if="${item.isComplete}" class="badge bg-success">Completed</span>
                 <span th:unless="${item.isComplete}" class="badge bg-warning text-dark">Pending</span>
             </td>
-            <td th:text="${item.createdAt}"></td>
-            <td th:text="${item.updatedAt}"></td>
+            <td th:text="${#temporals.format(item.createdAt, 'yyyy-MM-dd HH:mm')}"></td>
+            <td th:text="${#temporals.format(item.updatedAt, 'yyyy-MM-dd HH:mm')}"></td>
         </tr>
         </tbody>
     </table>
